@@ -1,3 +1,4 @@
+
 import java.awt.Font;
 import java.util.Scanner;
 import javax.swing.*;
@@ -41,10 +42,9 @@ public class LoginWindow {
         });
 
         frame.add(login);
-        frame.add(loginbutton);
         frame.add(pass);
         frame.add(createbutton);
+        frame.add(loginbutton);
         frame.add(label);
     }
-
 }
