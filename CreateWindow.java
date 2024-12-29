@@ -1,17 +1,15 @@
 import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import javax.swing.*;
 
 public class CreateWindow {
     JFrame frame;
     JLabel label;
     JTextField firstname, lastname, email, pass;
     JButton createaccount;
-    AccountList data;
+    HashMap<Integer,Account> data;
 
     CreateWindow(){
         frame = new JFrame();
@@ -21,7 +19,8 @@ public class CreateWindow {
         email = new JTextField();
         pass = new JTextField();
         createaccount = new JButton("Create Account");
-        data = new AccountList();
+        data = new HashMap<>();
+        
 
         frame.setVisible(true);
         frame.setSize(800,800);
@@ -40,9 +39,15 @@ public class CreateWindow {
         createaccount.setBounds(270, 490, 250, 60);
         createaccount.addActionListener(a -> {
 
-            Account account = new Account(firstname.getText(), lastname.getText(), email.getText(), pass.getText());
-            data.list.put(data.list.size(),account);
-            System.out.println(data.list.size());
+            String filepath = "";
+
+            try (FileWriter fwrite = new FileWriter(filepath, true)) {
+                fwrite.write("Account" + "\n" + firstname.getText() +"\n" + lastname.getText() + "\n" + email.getText() + "\n" + pass.getText());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            frame.dispose();
         });
 
 
